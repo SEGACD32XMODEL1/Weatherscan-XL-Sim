@@ -1,0 +1,77 @@
+<html id="clock" style="text-align: right; width: 100%">
+    <head>
+        <link rel="stylesheet" href="logo.css" />
+    </head>
+    <h1 id="time">
+        <span id="hours"></span>:<span id="minutes"></span>:<span
+            id="seconds"
+            style="text-align: left"
+        ></span>
+        <span id="TOD"></span>
+    </h1>
+    <h1 id="date"></h1>
+
+    <script>
+        const time = document.getElementById("time");
+        const hours = document.getElementById("hours");
+        const minutes = document.getElementById("minutes");
+        const seconds = document.getElementById("seconds");
+        const TOD = document.getElementById("TOD");
+        const curdate = document.getElementById("date");
+
+        function getClock() {
+            let date = new Date(Date.now());
+
+            if (date.getSeconds() < 10) {
+                seconds.innerText = "0" + date.getSeconds();
+            } else {
+                seconds.innerText = date.getSeconds();
+            }
+
+            if (date.getMinutes() < 10) {
+                minutes.innerText = "0" + date.getMinutes();
+            } else {
+                minutes.innerText = date.getMinutes();
+            }
+
+            if (date.getHours() > 12) {
+                hours.innerText = date.getHours() - 12;
+            } else {
+                hours.innerText = date.getHours();
+            }
+
+            if (date.getHours() < 12) {
+                TOD.innerText = "AM";
+            } else {
+                TOD.innerText = "PM";
+            }
+
+            let dow = ["", "MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
+            let months = [
+                "",
+                "JAN",
+                "FEB",
+                "MAR",
+                "APR",
+                "MAY",
+                "JUN",
+                "JUL",
+                "AUG",
+                "SEP",
+                "OCT",
+                "NOV",
+                "DEC",
+            ];
+
+            curdate.innerText = `${dow[date.getDay()]} ${
+                months[date.getMonth()]
+            } ${date.getDate()}`;
+
+            setTimeout(function () {
+                getClock();
+            }, 500);
+        }
+
+        getClock();
+    </script>
+</html>
